@@ -1,16 +1,14 @@
 
 //List of modules required
-.var express = require('express');
-.var app = express();
-var routes = require('./routes/routes');
-var path = require('path');
-.var socketio = require('socket.io');
-.var port = process.env.PORT || 80;
-.var arduinoSerialPort = '/dev/ttyACM0';
+var express = require('express');
+var app = express();
+var socketio = require('socket.io');
+var port = process.env.PORT || 80;
+var arduinoSerialPort = '/dev/ttyACM0';
 
-.var RobotStatus;
-.var serialport = require('serialport').serialport;
-.var serialport = new serialport("/dev/ttyACM0", {
+var RobotStatus;
+var serialport = require('serialport').serialport;
+var serialport = new serialport("/dev/ttyACM0", {
 	baudrate: 115200
 });
 
@@ -28,6 +26,7 @@ app.configure(function() {
   console.log("Done Configuring App...");
 });
   
+require('./routes/routes.js')(app);
   
 var server = app.listen(app.get('port'), function(){
 console.log("Robot Server listening on port " + app.get('port'));
